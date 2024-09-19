@@ -1,0 +1,22 @@
+<section class='overflow-hidden'>
+    <div class='banner h-100 overflow-hidden'>
+        <div class='banner-img w-100 h-100'></div>
+        <div class='banner-content w-100 h-100 d-flex flex-col'>
+            <h1>Chidori | Coffee in Bed®</h1>
+        </div>
+    </div>
+</section>
+
+{{#each branches}}
+    <h1>{{this.name}}</h1>
+    {{!-- <img src={{this.image}} alt=""> --}}
+    <p>{{this.description}}</p>
+{{/each}}
+
+<style>
+    section { height: calc(100vh - 4rem);} .banner { width: 200%; transform: translateX(-25%); border-top-left-radius:
+    50%; border-top-right-radius: 50%;} .banner-img { background-image:
+    url('https://chidori.vn/assets/home/hero-4a398e04c4f4c204a9bf05d471949b405a1271d26840bbcb7df4427e3f339ede.jpg');
+    background-position: center; background-repeat: no-repeat; background-size: cover;} .banner-content
+    {background-color: #3e261399;}
+</style>

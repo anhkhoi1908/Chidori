@@ -1,0 +1,125 @@
+<div class='container'>
+    <div class='text-center'>
+        <h1>Chidori - Đặt chỗ online</h1>
+    </div>
+    <form method='POST' action='/bookings/create' class='form-booking col-lg-6 mx-auto overflow-hidden px-0 my-5'>
+        <div class='form-header text-white py-3 px-4'>
+            <h3>Thông tin đặt chỗ</h3>
+        </div>
+        <div class='form-body px-4 my-4'>
+
+            <div class='form-row'>
+                <div class='form-group col-lg'>
+                    <label for=''>SỐ ĐIỆN THOẠI</label>
+                    <input type='text' class='form-control' id='phone' name='phone' required />
+                    <div class='valid-feedback'>Valid.</div>
+                    <div class='invalid-feedback'>Please fill out this field.</div>
+                </div>
+            </div>
+            <div class='form-row'>
+                <div class='form-group col-lg'>
+                    <label for=''>HỌ VÀ TÊN</label>
+                    <input type='text' class='form-control' id='name' name='name' required />
+                </div>
+            </div>
+            <div class='form-row'>
+                <div class='form-group col-lg'>
+                    <label for=''>EMAIL</label>
+                    <input type='email' class='form-control' id='email' name='email' pla required />
+                </div>
+            </div>
+            <div class='form-row'>
+                <div class='form-group col-lg'>
+                    <label for=''>CHI NHÁNH</label>
+                    <select id='campus' name='campus' class='form-control' required>
+                        <option selected>Chọn chi nhánh bạn muốn ghé thăm</option>
+                        <option>08</option>
+                        <option>09</option>
+                        <option>10</option>
+                        <option>11</option>
+                        <option>12</option>
+                        <option>13</option>
+                        <option>14</option>
+                        <option>15</option>
+                        <option>16</option>
+                        <option>17</option>
+                        <option>18</option>
+                        <option>19</option>
+                    </select>
+                </div>
+            </div>
+            <div class='form-row'>
+                <div class='form-group col-lg-4'>
+                    <label for=''>NGÀY ĐẾN</label>
+                    <input type='date' class='form-control' id='daycome' name='daycome' required />
+                </div>
+                <div class='form-group col-lg-4'>
+                    <label for=''>GIỜ ĐẾN</label>
+                    <select id='hour' name='hour' class='form-control' required>
+                        <option selected>Chọn giờ</option>
+                        <option>08</option>
+                        <option>09</option>
+                        <option>10</option>
+                        <option>11</option>
+                        <option>12</option>
+                        <option>13</option>
+                        <option>14</option>
+                        <option>15</option>
+                        <option>16</option>
+                        <option>17</option>
+                        <option>18</option>
+                        <option>19</option>
+                    </select>
+                </div>
+                <div class='form-group col-lg-4'>
+                    <label for='' class='text-white'>GIỜ ĐẾN</label>
+                    <select id='minute' name='minute' class='form-control' required>
+                        <option selected>Chọn phút</option>
+                        <option>00</option>
+                        <option>05</option>
+                        <option>10</option>
+                        <option>15</option>
+                        <option>20</option>
+                        <option>25</option>
+                        <option>30</option>
+                        <option>35</option>
+                        <option>40</option>
+                        <option>45</option>
+                        <option>50</option>
+                        <option>19</option>
+                    </select>
+                </div>
+            </div>
+            <div class='form-row'>
+                <div class='form-group col-lg'>
+                    <label for=''>BẠN MUỐN GHÉ THĂM CHIDORI BAO LÂU?</label>
+                    <select id='combo' name='combo' class='form-control'>
+                        <option selected>Chọn combo bạn muốn sử dụng</option>
+                        <option>5 gio</option>
+                    </select>
+                </div>
+            </div>
+            <div class='form-row'>
+                <div class='form-group col-lg'>
+                    <label for=''>LỜI NHẮN </label>
+                    <textarea type='text' class='form-control'></textarea>
+                </div>
+            </div>
+            <div class='text-center'>
+
+                <button type='submit' class='btn btn-primary rounded-pill p-4'>Chọn phương thức thanh toán</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<style>
+    .form-booking { border: 2px solid #936a4e; border-radius: 1rem;} .form-header { background-color: #936a4e;} input,
+    textarea, select { background-color: #FFF5EB !important; border-color: #f9e4cd !important; border-bottom: 1px solid
+    #936a4e !important;} .form-row {padding-bottom: 1rem;}
+</style>
+
+<script>
+    import Ripple
+</script>

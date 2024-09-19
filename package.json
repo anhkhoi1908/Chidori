@@ -1,0 +1,35 @@
+{
+    "name": "chidori",
+    "version": "1.0.0",
+    "main": "src/index.js",
+    "scripts": {
+        "start": "nodemon index.js",
+        "watch": "sass --watch src/resources/scss/app.scss src/public/css/app.css",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/anhkhoi1908/Chidori.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/anhkhoi1908/Chidori/issues"
+    },
+    "homepage": "https://github.com/anhkhoi1908/Chidori#readme",
+    "description": "",
+    "dependencies": {
+        "express": "^4.21.0",
+        "express-handlebars": "^8.0.1",
+        "method-override": "^3.0.0",
+        "mongoose": "^8.6.2",
+        "mongoose-delete": "^1.0.2",
+        "mongoose-slug-updater": "^3.3.0"
+    },
+    "devDependencies": {
+        "morgan": "^1.10.0",
+        "nodemon": "^3.1.4",
+        "sass": "^1.78.0",
+        "script": "^0.1.4"
+    }
+}
