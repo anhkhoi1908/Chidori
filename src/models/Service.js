@@ -3,11 +3,11 @@ const Schema = mongoose.Schema;
 const slug = require('mongoose-slug-updater');
 var mongoose_delete = require('mongoose-delete');
 
-const Branch = new Schema(
+const Service = new Schema(
     {
         name: { type: String },
-        image: { type: String },
-        description: { type: String },
+        image: { type: String},
+        description: { type: Number},
     },
     {
         timestamps: true,
@@ -15,7 +15,6 @@ const Branch = new Schema(
 );
 
 // Add plugin
-mongoose.plugin(slug);
-Branch.plugin(mongoose_delete, { deletedAt: true, overrideMethods: 'all' });
+Service.plugin(mongoose_delete, { deletedAt: true, overrideMethods: 'all' });
 
-module.exports = mongoose.model('Branch', Branch);
+module.exports = mongoose.model('Service', Service);

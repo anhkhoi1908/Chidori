@@ -20,6 +20,9 @@ app.use(
 );
 app.use(express.json());
 
+// Method override
+app.use(methodOverride('_method'));
+
 // Template engine
 app.engine(
     'hbs',

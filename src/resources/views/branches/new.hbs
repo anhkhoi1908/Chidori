@@ -1,0 +1,26 @@
+<div class="mt-4"></div>
+    <h3>Đăng khóa học</h3>
+    <form class="mt-4 container" method="POST" action="/branches/create">
+        <div class='mb-3'>
+            <label for='name'>Tên chi nhánh</label>
+            <input type='text' class='form-control' id='name' name='name' />
+        </div>
+        <div class='mb-3'>
+            <label for='description'>Mô tả</label>
+            <textarea name="description" id="description" class="form-control"></textarea>
+        </div>
+        <div class='mb-3'>
+            <label for='description'>Link hình ảnh</label>
+            <input type='text' class='form-control' id='image' name='image' />
+        </div>
+        {{!-- <div class='mb-3'></div>
+            <label for='videoId'>Video ID</label>
+            <input type='text' class='form-control' id='videoId' name='videoId' />
+        </div>
+        <div class='mb-3'></div>
+            <label for='image'>Image</label>
+            <input type='text' class='form-control' id='image' name='image' />
+        </div> --}}
+        <button type='submit' class='btn btn-primary'>Thêm chi nhánh</button>
+    </form>
+</div>
