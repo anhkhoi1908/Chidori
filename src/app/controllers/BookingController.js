@@ -1,13 +1,15 @@
 const Booking = require('../../models/Booking');
+const Branch = require('../../models/Branch');
+const Combo = require('../../models/Combo');
 
 class BookingController {
     // [GET] /bookings/new
     index(req, res, next) {
-        res.render('clients/booking-new');
-        // Booking.find({})
-        //     .lean()
-        //     .then((bookings) => res.render('clients/booking-new', { bookings }))
-        //     .catch(next);
+        // res.render('clients/booking-new');
+
+        Promise.all([Branch.find({}).lean(), Combo.find({}).lean()])
+            .then(([branches, combos]) => res.render('clients/booking-new', { branches, combos }))
+            .catch(next);
     }
 
     // [POST] /bookings/create

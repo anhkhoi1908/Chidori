@@ -8,6 +8,8 @@ const Branch = new Schema(
         name: { type: String },
         image: { type: String },
         description: { type: String },
+        address: { type: String },
+        slug: { type: String, slug: 'name', unique: true },
     },
     {
         timestamps: true,

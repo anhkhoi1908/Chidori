@@ -7,21 +7,22 @@
     </div>
 </section> }}
 
-<div class='container'>
+<div class='container my-5'>
     <div class='row justify-between'>
         {{! <div class='card-deck'> }}
         {{#each branches}}
-
             <div class='card col-lg-4 px-0 overflow-hidden branch-item' style=''>
-                <img src={{this.image}} class='card-img-top card-img-service' alt='...' />
-                <div class='card-body'>
-                    <h5 class='card-title'>{{this.name}}</h5>
-                    <p class='card-text'>{{this.description}}</p>
-                </div>
+                <a href='/branches/{{this.slug}}'>
+                    <img src={{this.image}} class='card-img-top card-img-service' alt='...' />
+                    <div class='card-body'>
+                        <h5 class='card-title'>{{this.name}}</h5>
+                        <p class='card-text'>{{this.description}}</p>
+                    </div>
+
+                </a>
             </div>
         {{/each}}
         {{! </div> }}
-
     </div>
 </div>
 

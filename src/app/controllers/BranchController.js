@@ -33,6 +33,38 @@ class BranchController {
             .then(() => res.redirect('/'))
             .catch(next);
     }
+
+    // [DELETE] /branches/:id
+    delete(req, res, next) {
+        // res.jon(req.body)
+        Branch.delete({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }
+
+    // [DELETE] /branches/:id/force
+    forceDelete(req, res, next) {
+        Branch.deleteOne({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }
+
+    // [PATCH] /branches/:id/restore
+    restore(req, res, next) {
+        Branch.restore({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }
+
+    // [GET] /branches/:slug
+    detail(req, res, next) {
+        // res.send('COURSE DETAILS');
+        Branch.findOne({ slug: req.params.slug })
+            .lean()
+            // .then((course) => res.json(course))
+            .then((branch) => res.render('branches/detail', { branch }))
+            .catch(next);
+    }
 }
 
 module.exports = new BranchController();

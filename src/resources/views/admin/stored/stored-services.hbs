@@ -1,6 +1,6 @@
 <form class='mt-4 container' method='POST' action='' name='container-form'>
-    <h3>Danh sách chi nhánh</h3>
-    <a href='/me/trash/courses'>Thùng rác ({{deletedCount}})</a>
+    <h3>Danh sách dịch vụ</h3>
+    {{!-- <a href='/admin/trash/branches'>Thùng rác ({{deletedCount}})</a> --}}
     <div class='mt-4 d-flex align-items-center justify-content-between'>
         <div class='d-flex align-items-center'>
             <div class='form-check'>
@@ -29,15 +29,16 @@
             <tr>
                 <th scope='col'></th>
                 <th scope='col'>STT</th>
-                <th scope='col'>Tên chi nhánh</th>
+                <th scope='col'>Tên dịch vụ</th>
                 <th scope='col'>Mô tả</th>
+                <th scope='col'>Hành động</th>
                 {{! <th scope='col'>SĐT</th>
                 <th scope='col'>Thời gian đặt</th>
                 <th scope='col'>Combo</th> }}
             </tr>
         </thead>
         <tbody>
-            {{#each branches}}
+            {{#each services}}
                 <tr>
                     <td>
                         <div class='form-check'>
@@ -46,12 +47,12 @@
                     </td>
                     <th scope='row'>{{sum @index 1}}</th>
                     <td>{{this.name}}</td>
-                    {{!-- <td>{{this.description}}</td> --}}
+                    <td>{{this.description}}</td>
                     {{!-- <td>{{this.phone}}</td>
                     <td>{{this.hour}}:{{this.minute}} | {{this.daycome}}</td>
                     <td>{{this.combo}}</td> --}}
                     <td>
-                        <a href='/branches/{{this._id}}/edit' type='button' class='btn btn-warning'>Sửa</a>
+                        <a href='/services/{{this._id}}/edit' type='button' class='btn btn-warning'>Sửa</a>
                         <a
                             type='button'
                             data-toggle='modal'
@@ -91,7 +92,7 @@
 </div>
 
 {{! Delete form  }}
-<form name='delete-course-form' method='POST'></form>
+<form name='delete-branch-form' method='POST'></form>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() { // Check all course var checkboxAll = $('#checkbox-all');
@@ -107,9 +108,9 @@
     // Check all submit button clicked const containerForm = document.forms['container-form']
     checkAllSubmitBtn.click(function(e) { e.preventDefault() const isSubmitable = !$(this).hasClass('disabled')
     {{! console.log(isSubmitable) }}
-    if(isSubmitable) { containerForm.submit() } }) // Delete course var courseId; const btnDeleteCourse =
-    document.getElementById('delete-btn'); const deleteForm = document.forms['delete-course-form'];
-    $('#delete').on('show.bs.modal', function(event) { const button = $(event.relatedTarget); courseId =
-    button.data('id'); }) // Button delete clicked btnDeleteCourse.addEventListener('click', function() {
-    deleteForm.action = '/courses/' + courseId + '?_method=DELETE'; deleteForm.submit(); }) })
+    if(isSubmitable) { containerForm.submit() } }) // Delete course var branchId; const btnDeleteBranch =
+    document.getElementById('delete-btn'); const deleteForm = document.forms['delete-branch-form'];
+    $('#delete').on('show.bs.modal', function(event) { const button = $(event.relatedTarget); branchId =
+    button.data('id'); }) // Button delete clicked btnDeleteBranch.addEventListener('click', function() {
+    deleteForm.action = '/services/' + branchId + '?_method=DELETE'; deleteForm.submit(); }) })
 </script>
