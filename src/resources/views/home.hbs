@@ -8,21 +8,42 @@
 </section> }}
 
 <div class='container my-5'>
-    <div class='row justify-between'>
-        {{! <div class='card-deck'> }}
+    <div class='text-center mb-5'>
+        <h1 class='font-weight-bold'>Chi nhánh Chidori</h1>
+    </div>
+    <div class='row row-cols-1 row-cols-md-3'>
         {{#each branches}}
-            <div class='card col-lg-4 px-0 overflow-hidden branch-item' style=''>
-                <a href='/branches/{{this.slug}}'>
-                    <img src={{this.image}} class='card-img-top card-img-service' alt='...' />
-                    <div class='card-body'>
-                        <h5 class='card-title'>{{this.name}}</h5>
-                        <p class='card-text'>{{this.description}}</p>
-                    </div>
-
-                </a>
+            <div class='col mb-4'>
+                <div class='card px-0 overflow-hidden branch-item' style=''>
+                    <a href='/branches/{{this.slug}}' style='color: var(--text-color)'>
+                        <img src={{this.image}} class='card-img-top card-img-service' alt='...' />
+                        <div class='card-body px-5'>
+                            <h2 class='card-title text-dark font-weight-bold my-3'>{{this.name}}</h2>
+                            <p class='card-text'>{{this.description}}</p>
+                        </div>
+                    </a>
+                </div>
             </div>
         {{/each}}
-        {{! </div> }}
+    </div>
+
+    <div class=''>
+        <div class='tabs'>
+            {{#each services}}
+                <div class='tab-item active'>
+                    <i class='tab-icon fas fa-code'></i>
+                    {{this.name}}
+                </div>
+                <div class='line'></div>
+            {{/each}}
+        </div>
+        <div class='tab-content'>
+            {{#each services}}
+                <div class='tab-pane active'>
+                    <h2>{{this.name}}</h2>
+                </div>
+            {{/each}}
+        </div>
     </div>
 </div>
 
@@ -32,5 +53,25 @@
     url('https://chidori.vn/assets/home/hero-4a398e04c4f4c204a9bf05d471949b405a1271d26840bbcb7df4427e3f339ede.jpg');
     background-position: center; background-repeat: no-repeat; background-size: cover;} .banner-content
     {background-color: #3e261399;} .card-img-service { aspect-ratio: 2; object-fit: cover;} .branch-item {
-    border-radius: 4rem !important; }
+    border-radius: 4rem !important; } .tabs { display: flex; position: relative; } .tabs .line { position: absolute;
+    left: 0; bottom: 0; width: 0; height: 6px; border-radius: 15px; background-color: #c23564; transition: all 0.2s
+    ease; } .tab-item { min-width: 80px; padding: 16px 20px 11px 20px; font-size: 20px; text-align: center; color:
+    #c23564; background-color: #fff; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom: 5px solid
+    transparent; opacity: 0.6; cursor: pointer; transition: all 0.5s ease; } .tab-icon { font-size: 24px; width: 32px;
+    position: relative; top: 2px; } .tab-item:hover { opacity: 1; background-color: rgba(194, 53, 100, 0.05);
+    border-color: rgba(194, 53, 100, 0.1); } .tab-item.active { opacity: 1; } .tab-content { padding: 28px 0; }
+    .tab-pane { color: #333; display: none; } .tab-pane.active { display: block; } .tab-pane h2 { font-size: 24px;
+    margin-bottom: 8px; }
 </style>
+
+<script>
+    const $ = document.querySelector.bind(document); const $$ = document.querySelectorAll.bind(document); const tabs =
+    $$(".tab-item"); const panes = $$(".tab-pane"); const tabActive = $(".tab-item.active"); const line = $(".tabs
+    .line"); // SonDN fixed - Active size wrong size on first load. // Original post:
+    https://www.facebook.com/groups/649972919142215/?multi_permalinks=1175881616551340 requestIdleCallback(function () {
+    line.style.left = tabActive.offsetLeft + "px"; line.style.width = tabActive.offsetWidth + "px"; });
+    tabs.forEach((tab, index) => { const pane = panes[index]; tab.onclick = function () {
+    $(".tab-item.active").classList.remove("active"); $(".tab-pane.active").classList.remove("active"); line.style.left
+    = this.offsetLeft + "px"; line.style.width = this.offsetWidth + "px"; this.classList.add("active");
+    pane.classList.add("active"); }; });
+</script>

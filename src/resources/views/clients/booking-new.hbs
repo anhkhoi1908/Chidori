@@ -1,6 +1,6 @@
 <div class='container'>
-    <div class='text-center'>
-        <h1>Chidori - Đặt chỗ online</h1>
+    <div class='text-center my-5'>
+        <h1 class='font-weight-bold'>Chidori - Đặt chỗ online</h1>
     </div>
     <form method='POST' action='/bookings/create' class='form-booking mx-auto overflow-hidden px-0 my-5'>
         <div class='d-flex flex-column align-items-center'>
@@ -28,7 +28,6 @@
                 </div>
             </div>
             <div class='form-booking-item col-lg-6 px-0 overflow-hidden'>
-
                 <div class='form-header text-white py-3 px-4'>
                     <h3>Thông tin đặt chỗ</h3>
                 </div>
@@ -95,10 +94,11 @@
                             <select id='combo' name='combo' class='form-control'>
                                 <option selected>Chọn combo bạn muốn sử dụng</option>
                                 {{#each combos}}
+                                    <option>{{this.name}}</option>
+
                                     {{!-- {{#if this.service="Private Room"}}
                                         {{this.name}}
                                     {{/if}} --}}
-                                    {{this.name}}
                                 {{/each}}
                             </select>
                         </div>
@@ -126,7 +126,3 @@
     background-color: #936a4e;} input, textarea, select { background-color: #FFF5EB !important; border-color: #f9e4cd
     !important; border-bottom: 1px solid #936a4e !important;} .form-row {padding-bottom: 1rem;}
 </style>
-
-<script>
-    import Ripple
-</script>

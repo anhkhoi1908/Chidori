@@ -1,0 +1,166 @@
+<form class='mt-4 container' method='POST' action='' name='container-form'>
+    <a href='/admin/stored/bookings'>Quay lại</a>
+    <h3>Chi nhánh đã xóa</h3>
+    <div class='mt-4 d-flex align-items-center justify-content-between'>
+        <div class='d-flex align-items-center'>
+            <div class='form-check'>
+                <input class='form-check-input' type='checkbox' id='checkbox-all' />
+                <label class='form-check-label' for='checkbox-all'>
+                    Chọn tất cả
+                </label>
+            </div>
+            <select
+                class='form-select checkbox-select-all-options'
+                aria-label='Default select example'
+                style='width: 14rem; margin: 0 1rem'
+                name='action'
+                required
+            >
+                <option value=''>-- Chọn hành động --</option>
+                <option value='delete'>Xóa</option>
+            </select>
+            <div class='btn btn-primary disabled check-all-submit-btn'>Thực hiện</div>
+        </div>
+
+        <a href='/bookings/new' type='button' class='btn btn-primary'>Thêm mới</a>
+    </div>
+    <table class='table mt-4'>
+        <thead>
+            <tr>
+                <th scope='col'></th>
+                <th scope='col'>STT</th>
+                <th scope='col'>Tên chi nhánh</th>
+                <th scope='col'>Mô tả</th>
+                {{! <th scope='col'>SĐT</th>
+                <th scope='col'>Thời gian đặt</th>
+                <th scope='col'>Combo</th> }}
+            </tr>
+        </thead>
+        <tbody>
+            {{#each bookings}}
+                <tr>
+                    <td>
+                        <div class='form-check'>
+                            <input class='form-check-input' type='checkbox' value='{{this._id}}' name='courseIds[]' />
+                        </div>
+                    </td>
+                    <th scope='row'>{{sum @index 1}}</th>
+                    <td>{{this.name}}</td>
+                    {{!-- <td>{{this.description}}</td> --}}
+                    {{!-- <td>{{this.phone}}</td>
+                    <td>{{this.hour}}:{{this.minute}} | {{this.daycome}}</td>
+                    <td>{{this.combo}}</td> --}}
+                    <td>
+                        <a href='' type='button' class='btn btn-warning btn-restore' data-id={{this._id}}>Khôi phục</a>
+                        <a
+                            type='button'
+                            data-toggle='modal'
+                            data-target='#delete'
+                            data-id={{this._id}}
+                            class='btn btn-danger'
+                        >Xóa vĩnh viễn</a>
+                    </td>
+                </tr>
+            {{else}}
+                <tr>
+                    <td colspan='5' class='text-center'>Thùng rác trống.
+                        <a href='/admin/stored/bookings'>Danh sách chi nhánh</a></td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</form>
+
+{{! Confirm delete course }}
+<div class='modal fade' tabindex='-1' id='delete'>
+    <div class='modal-dialog'>
+        <div class='modal-content'>
+            <div class='modal-header'>
+                <h5 class='modal-title'>Xóa khóa học</h5>
+                <button type='button' class='btn-close' data-dismiss='modal' aria-label='Close'></button>
+            </div>
+            <div class='modal-body'>
+                <p>Bạn chắc chắn muốn xóa khóa học này?</p>
+            </div>
+            <div class='modal-footer'>
+                <button type='button' class='btn btn-danger' id='delete-btn'>Xóa bỏ</button>
+                <button type='button' class='btn btn-secondary' data-dismiss='modal'>Hủy</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{! Delete form  }}
+<form name='delete-booking-form' method='POST'></form>
+
+{{! Restore form  }}
+<form name='restore-booking-form' method='POST'></form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() { 
+    // Check all course
+        var checkboxAll = $('#checkbox-all');
+        const courseItemCheckbox = $('input[name="courseIds[]"]');
+
+        // Checkbox all clicked
+        checkboxAll.change(function() {
+            var isCheckAll = $(this).prop('checked');
+            courseItemCheckbox.prop('checked', isCheckAll)
+            renderCheckAllSubmitBtn()
+        }); 
+
+        // Course item checkbox changed
+        courseItemCheckbox.change(function() {
+            var isCheckAll = courseItemCheckbox.length === $('input[name="courseIds[]"]:checked').length
+            checkboxAll.prop('checked', isCheckAll)
+            renderCheckAllSubmitBtn()
+        })
+
+        // Re-render checkall submit button
+        const checkAllSubmitBtn = $('.check-all-submit-btn')
+        function renderCheckAllSubmitBtn() {
+            const checkedCount = $('input[name="courseIds[]"]:checked').length
+            {{!-- console.log(checkedCount) --}}
+            if(checkedCount > 0) {
+                checkAllSubmitBtn.removeClass('disabled')
+            } else {
+                checkAllSubmitBtn.addClass('disabled')
+            }
+        }
+
+        // Check all submit button clicked
+        const containerForm = document.forms['container-form']
+        checkAllSubmitBtn.click(function(e) {
+            e.preventDefault()
+            const isSubmitable = !$(this).hasClass('disabled')
+            {{!-- console.log(isSubmitable) --}}
+            if(isSubmitable) {
+                containerForm.submit()
+            }
+        })
+        
+    // Delete course (xóa mềm, vĩnh viễn đều sử dụng được). Xóa mềm thì thêm plugin và đổi deleteOne -> delete
+        var bookingId; 
+        const btnDeleteBooking = document.getElementById('delete-btn'); 
+        const deleteForm = document.forms['delete-booking-form'];
+
+        $('#delete').on('show.bs.modal', function(event) { 
+            const button = $(event.relatedTarget); 
+            bookingId = button.data('id');  
+        }) 
+
+        // Button delete clicked
+        btnDeleteBooking.addEventListener('click', function() { deleteForm.action = '/bookings/' + bookingId + '/force?_method=DELETE'; 
+        deleteForm.submit(); })
+
+        // Button restore clicked
+        const restoreBtn = $('.btn-restore')
+        const restoreForm = document.forms['restore-booking-form'];
+        restoreBtn.click(function(e) {
+            e.preventDefault()
+            var bookingId = $(this).data('id')
+            restoreForm.action = '/bookings/' + bookingId + '/restore?_method=PATCH'; 
+            restoreForm.submit();
+        })
+    })
+</script>   

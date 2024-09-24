@@ -1,6 +1,6 @@
 <form class='mt-4 container' method="POST" action="" name="container-form">
     <h3>Danh sách Bookings</h3>
-    <a href="/me/trash/courses">Thùng rác ({{deletedCount}})</a>
+    <a href="/admin/trash/bookings">Thùng rác ({{deletedCount}})</a>
     <div class='mt-4 d-flex align-items-center justify-content-between'>
         <div class="d-flex align-items-center">
         <div class='form-check'>
@@ -90,7 +90,7 @@
 </div>
 
 {{! Delete form  }}
-<form name='delete-course-form' method='POST'></form>
+<form name='delete-booking-form' method='POST'></form>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() { 
@@ -136,17 +136,17 @@
         })
         
     // Delete course
-        var courseId; 
-        const btnDeleteCourse = document.getElementById('delete-btn'); 
-        const deleteForm = document.forms['delete-course-form'];
+        var bookingId; 
+        const btnDeleteBooking = document.getElementById('delete-btn'); 
+        const deleteForm = document.forms['delete-booking-form'];
 
         $('#delete').on('show.bs.modal', function(event) { 
             const button = $(event.relatedTarget); 
-            courseId = button.data('id');  
+            bookingId = button.data('id');  
         }) 
 
         // Button delete clicked
-        btnDeleteCourse.addEventListener('click', function() { deleteForm.action = '/courses/' + courseId + '?_method=DELETE'; 
+        btnDeleteBooking.addEventListener('click', function() { deleteForm.action = '/bookings/' + bookingId + '?_method=DELETE'; 
         deleteForm.submit(); })
     })
 </script>   

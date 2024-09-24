@@ -24,7 +24,7 @@
 
         <a href='/branches/new' type='button' class='btn btn-primary'>Thêm mới</a>
     </div>
-    <table class='table mt-4'>
+    <table class='table mt-4' id="myTable">
         <thead>
             <tr>
                 <th scope='col'></th>
@@ -95,22 +95,67 @@
 <form name='delete-branch-form' method='POST'></form>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() { // Check all course var checkboxAll = $('#checkbox-all');
-    const courseItemCheckbox = $('input[name="courseIds[]"]'); // Checkbox all clicked checkboxAll.change(function() {
-    var isCheckAll = $(this).prop('checked'); courseItemCheckbox.prop('checked', isCheckAll) renderCheckAllSubmitBtn()
-    }); // Course item checkbox changed courseItemCheckbox.change(function() { var isCheckAll =
-    courseItemCheckbox.length === $('input[name="courseIds[]"]:checked').length checkboxAll.prop('checked', isCheckAll)
-    renderCheckAllSubmitBtn() }) // Re-render checkall submit button const checkAllSubmitBtn =
-    $('.check-all-submit-btn') function renderCheckAllSubmitBtn() { const checkedCount =
-    $('input[name="courseIds[]"]:checked').length
-    {{! console.log(checkedCount) }}
-    if(checkedCount > 0) { checkAllSubmitBtn.removeClass('disabled') } else { checkAllSubmitBtn.addClass('disabled') } }
-    // Check all submit button clicked const containerForm = document.forms['container-form']
-    checkAllSubmitBtn.click(function(e) { e.preventDefault() const isSubmitable = !$(this).hasClass('disabled')
-    {{! console.log(isSubmitable) }}
-    if(isSubmitable) { containerForm.submit() } }) // Delete course var branchId; const btnDeleteBranch =
-    document.getElementById('delete-btn'); const deleteForm = document.forms['delete-branch-form'];
-    $('#delete').on('show.bs.modal', function(event) { const button = $(event.relatedTarget); branchId =
-    button.data('id'); }) // Button delete clicked btnDeleteBranch.addEventListener('click', function() {
-    deleteForm.action = '/branches/' + branchId + '?_method=DELETE'; deleteForm.submit(); }) })
-</script>
+    import DataTable from 'datatables.net-dt';
+    $(document).ready(function() {
+        $('#myTable').DataTable()
+    })
+
+    document.addEventListener('DOMContentLoaded', function() { 
+    // Check all course
+        var checkboxAll = $('#checkbox-all');
+        const courseItemCheckbox = $('input[name="courseIds[]"]');
+
+        // Checkbox all clicked
+        checkboxAll.change(function() {
+            var isCheckAll = $(this).prop('checked');
+            courseItemCheckbox.prop('checked', isCheckAll)
+            renderCheckAllSubmitBtn()
+        }); 
+
+        // Course item checkbox changed
+        courseItemCheckbox.change(function() {
+            var isCheckAll = courseItemCheckbox.length === $('input[name="courseIds[]"]:checked').length
+            checkboxAll.prop('checked', isCheckAll)
+            renderCheckAllSubmitBtn()
+        })
+
+        // Re-render checkall submit button
+        const checkAllSubmitBtn = $('.check-all-submit-btn')
+        function renderCheckAllSubmitBtn() {
+            const checkedCount = $('input[name="courseIds[]"]:checked').length
+            {{!-- console.log(checkedCount) --}}
+            if(checkedCount > 0) {
+                checkAllSubmitBtn.removeClass('disabled')
+            } else {
+                checkAllSubmitBtn.addClass('disabled')
+            }
+        }
+
+        // Check all submit button clicked
+        const containerForm = document.forms['container-form']
+        checkAllSubmitBtn.click(function(e) {
+            e.preventDefault()
+            const isSubmitable = !$(this).hasClass('disabled')
+            {{!-- console.log(isSubmitable) --}}
+            if(isSubmitable) {
+                containerForm.submit()
+            }
+        })
+        
+    // Delete course
+        var branchId; 
+        const btnDeleteBranch = document.getElementById('delete-btn'); 
+        const deleteForm = document.forms['delete-branch-form'];
+
+        $('#delete').on('show.bs.modal', function(event) { 
+            const button = $(event.relatedTarget); 
+            branchId = button.data('id');  
+        }) 
+
+        // Button delete clicked
+        btnDeleteBranch.addEventListener('click', function() { deleteForm.action = '/branches/' + branchId + '?_method=DELETE'; 
+        deleteForm.submit(); })
+    })
+
+</script> 
+
