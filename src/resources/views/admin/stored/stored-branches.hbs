@@ -1,5 +1,7 @@
 <form class='mt-4 container' method='POST' action='' name='container-form'>
-    <h3>Danh sách chi nhánh</h3>
+    <div class="text-center my-5">
+        <h1 class="font-weight-bold">Danh sách chi nhánh</h1>
+    </div>
     <a href='/admin/trash/branches'>Thùng rác ({{deletedCount}})</a>
     <div class='mt-4 d-flex align-items-center justify-content-between'>
         <div class='d-flex align-items-center'>
@@ -24,52 +26,56 @@
 
         <a href='/branches/new' type='button' class='btn btn-primary'>Thêm mới</a>
     </div>
-    <table class='table mt-4' id="myTable">
-        <thead>
-            <tr>
-                <th scope='col'></th>
-                <th scope='col'>STT</th>
-                <th scope='col'>Tên chi nhánh</th>
-                <th scope='col'>Địa chỉ</th>
-                <th scope='col'>Mô tả</th>
-                {{! <th scope='col'>SĐT</th>
-                <th scope='col'>Thời gian đặt</th>
-                <th scope='col'>Combo</th> }}
-            </tr>
-        </thead>
-        <tbody>
-            {{#each branches}}
+    <div class="overflow-hidden" style="overflow-x: auto !important;">
+        <table class='table mt-4' id="table">
+            <thead>
                 <tr>
-                    <td>
-                        <div class='form-check'>
-                            <input class='form-check-input' type='checkbox' value='{{this._id}}' name='courseIds[]' />
-                        </div>
-                    </td>
-                    <th scope='row'>{{sum @index 1}}</th>
-                    <td>{{this.name}}</td>
-                    <td>{{this.address}}</td>
-                    {{!-- <td>{{this.phone}}</td>
-                    <td>{{this.hour}}:{{this.minute}} | {{this.daycome}}</td>
-                    <td>{{this.combo}}</td> --}}
-                    <td>
-                        <a href='/branches/{{this._id}}/edit' type='button' class='btn btn-warning'>Sửa</a>
-                        <a
-                            type='button'
-                            data-toggle='modal'
-                            data-target='#delete'
-                            data-id='{{this._id}}'
-                            class='btn btn-danger'
-                        >Xóa</a>
-                    </td>
+                    <th scope='col'></th>
+                    <th scope='col'>STT</th>
+                    <th scope='col'>Tên chi nhánh</th>
+                    <th scope='col'>Địa chỉ</th>
+                    <th scope='col'>Giờ mở cửa</th>
+                    <th scope='col'>Điện thoại</th>
+                    <th scope='col'>Mô tả</th>
+                    <th scope='col'>Slug</th>
+                    <th scope='col'>Hành động</th>
                 </tr>
-            {{else}}
-                <tr>
-                    <td colspan='5' class='text-center'>Bạn chưa đăng khóa học nào.
-                        <a href='/bookings/create'>Đăng khóa học</a></td>
-                </tr>
-            {{/each}}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {{#each branches}}
+                    <tr>
+                        <td>
+                            <div class='form-check'>
+                                <input class='form-check-input' type='checkbox' value='{{this._id}}' name='courseIds[]' />
+                            </div>
+                        </td>
+                        <td scope='row'>{{sum @index 1}}</td>
+                        <td>{{this.name}}</td>
+                        <td>{{this.address}}</td>
+                        <td>{{this.opening_hours}}:00 - {{this.closing_hours}}:00</td>
+                        <td>{{this.phone}}</td>
+                        <td>{{this.description}}</td>
+                        <td>{{this.slug}}</td>
+                        <td>
+                            <a href='/branches/{{this._id}}/edit' type='button' class='btn btn-warning'>Sửa</a>
+                            <a
+                                type='button'
+                                data-toggle='modal'
+                                data-target='#delete'
+                                data-id='{{this._id}}'
+                                class='btn btn-danger'
+                            >Xóa</a>
+                        </td>
+                    </tr>
+                {{else}}
+                    <tr>
+                        <td colspan='5' class='text-center'>Bạn chưa đăng khóa học nào.
+                            <a href='/bookings/create'>Đăng khóa học</a></td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
 </form>
 
 {{! Confirm delete course }}
@@ -95,11 +101,6 @@
 <form name='delete-branch-form' method='POST'></form>
 
 <script>
-    import DataTable from 'datatables.net-dt';
-    $(document).ready(function() {
-        $('#myTable').DataTable()
-    })
-
     document.addEventListener('DOMContentLoaded', function() { 
     // Check all course
         var checkboxAll = $('#checkbox-all');

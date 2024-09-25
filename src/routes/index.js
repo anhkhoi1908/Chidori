@@ -1,3 +1,4 @@
+const membershipRouter = require('./membership');
 const homeRouter = require('./home');
 const clientsRouter = require('./clients');
 const bookingsRouter = require('./bookings');
@@ -11,6 +12,7 @@ function route(app) {
     app.use('/services', servicesRouter);
     app.use('/admin', adminRouter);
     app.use('/clients', clientsRouter);
+    app.use('/membership', membershipRouter);
     app.use('/', homeRouter);
 }
 

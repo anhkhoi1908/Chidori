@@ -1,47 +1,48 @@
-<form class='mt-4 container' method="POST" action="" name="container-form">
-    <h3>Danh sách Bookings</h3>
-    <a href="/admin/trash/bookings">Thùng rác ({{deletedCount}})</a>
+<form class='mt-4 container' method='POST' action='' name='container-form'>
+    <div class="text-center my-5">
+        <h1 class="font-weight-bold">Danh sách chi nhánh</h1>
+    </div>
+    <a href='/admin/trash/memberships'>Thùng rác ({{deletedCount}})</a>
     <div class='mt-4 d-flex align-items-center justify-content-between'>
-        <div class="d-flex align-items-center">
-        <div class='form-check'>
-            <input class='form-check-input' type='checkbox' id='checkbox-all' />
-            <label class='form-check-label' for='checkbox-all'>
-                Chọn tất cả
-            </label>
+        <div class='d-flex align-items-center'>
+            <div class='form-check'>
+                <input class='form-check-input' type='checkbox' id='checkbox-all' />
+                <label class='form-check-label' for='checkbox-all'>
+                    Chọn tất cả
+                </label>
+            </div>
+            <select
+                class='form-select checkbox-select-all-options'
+                aria-label='Default select example'
+                style='width: 14rem; margin: 0 1rem'
+                name='action'
+                required
+            >
+                <option value=''>-- Chọn hành động --</option>
+                <option value='delete'>Xóa</option>
+            </select>
+            <div class='btn btn-primary disabled check-all-submit-btn'>Thực hiện</div>
         </div>
-        <select
-            class='form-select checkbox-select-all-options'
-            aria-label='Default select example'
-            style='width: 14rem; margin: 0 1rem'
-            name="action"
-            required
-        >
-            <option value="">-- Chọn hành động --</option>
-            <option value='delete'>Xóa</option>
-        </select>
-        <div class='btn btn-primary disabled check-all-submit-btn'>Thực hiện</div>
-        </div>
-            
-        {{!-- <a href="/clients/bookings/new" type="button" class="btn btn-primary">Thêm mới</a> --}}
+
+        <a href='/memberships/new' type='button' class='btn btn-primary'>Thêm mới</a>
     </div>
     <div class="overflow-hidden" style="overflow-x: auto !important;">
-        <table class='table mt-4'>
+        <table class='table mt-4' id="table">
             <thead>
                 <tr>
                     <th scope='col'></th>
                     <th scope='col'>STT</th>
-                    <th scope='col'>Tên người đặt</th>
-                    <th scope='col'>SĐT</th>
-                    <th scope='col'>Email</th>
-                    <th scope='col'>Thời gian đặt</th>
-                    <th scope='col'>Chi nhánh</th>
-                    <th scope='col'>Combo</th>
-                    <th scope='col'>Note</th>
+                    <th scope='col'>Tên chi nhánh</th>
+                    <th scope='col'>Địa chỉ</th>
+                    <th scope='col'>Giờ mở cửa</th>
+                    <th scope='col'>Điện thoại</th>
+                    <th scope='col'>Mô tả</th>
+                    <th scope='col'>Slug</th>
                     <th scope='col'>Hành động</th>
                 </tr>
             </thead>
             <tbody>
-                {{#each bookings}}
+                {{#each memberships}}
                     <tr>
                         <td>
                             <div class='form-check'>
@@ -50,31 +51,30 @@
                         </td>
                         <td scope='row'>{{sum @index 1}}</td>
                         <td>{{this.name}}</td>
+                        <td>{{this.address}}</td>
+                        <td>{{this.opening_hours}}:00 - {{this.closing_hours}}:00</td>
                         <td>{{this.phone}}</td>
-                        <td>{{this.email}}</td>
-                        <td>{{this.hour}}:{{this.minute}} | {{this.daycome}}</td>
-                        <td>{{this.campus}}</td>
-                        <td>{{this.combo}}</td>
-                        <td>{{this.note}}</td>
+                        <td>{{this.description}}</td>
+                        <td>{{this.slug}}</td>  
                         <td>
-                            {{!-- <a href='/courses/{{this._id}}/edit' type='button' class='btn btn-warning'>Sửa</a> --}}
+                            <a href='/memberships/{{this._id}}/edit' type='button' class='btn btn-warning'>Sửa</a>
                             <a
                                 type='button'
                                 data-toggle='modal'
                                 data-target='#delete'
-                                data-id='{{this._id}}'  
+                                data-id='{{this._id}}'
                                 class='btn btn-danger'
                             >Xóa</a>
                         </td>
                     </tr>
-                    {{else}}
+                {{else}}
                     <tr>
-                        <td colspan="5" class="text-center">Bạn chưa đăng khóa học nào. <a href="/bookings/create">Đăng khóa học</a></td>
+                        <td colspan='5' class='text-center'>Bạn chưa đăng khóa học nào.
+                            <a href='/bookings/create'>Đăng khóa học</a></td>
                     </tr>
                 {{/each}}
             </tbody>
         </table>
-
     </div>
 </form>
 
@@ -98,7 +98,7 @@
 </div>
 
 {{! Delete form  }}
-<form name='delete-booking-form' method='POST'></form>
+<form name='delete-branch-form' method='POST'></form>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() { 
@@ -144,18 +144,19 @@
         })
         
     // Delete course
-        var bookingId; 
-        const btnDeleteBooking = document.getElementById('delete-btn'); 
-        const deleteForm = document.forms['delete-booking-form'];
+        var branchId; 
+        const btnDeleteBranch = document.getElementById('delete-btn'); 
+        const deleteForm = document.forms['delete-branch-form'];
 
         $('#delete').on('show.bs.modal', function(event) { 
             const button = $(event.relatedTarget); 
-            bookingId = button.data('id');  
+            branchId = button.data('id');  
         }) 
 
         // Button delete clicked
-        btnDeleteBooking.addEventListener('click', function() { deleteForm.action = '/bookings/' + bookingId + '?_method=DELETE'; 
+        btnDeleteBranch.addEventListener('click', function() { deleteForm.action = '/memberships/' + branchId + '?_method=DELETE'; 
         deleteForm.submit(); })
     })
-</script>   
+
+</script> 
 

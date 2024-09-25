@@ -12,6 +12,7 @@ const Booking = new Schema(
         hour: { type: String },
         minute: { type: String },
         combo: { type: String },
+        note: { type: String },
     },
     {
         timestamps: true,

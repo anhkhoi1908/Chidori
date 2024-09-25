@@ -9,6 +9,10 @@ const Branch = new Schema(
         image: { type: String },
         description: { type: String },
         address: { type: String },
+        phone: {type: Number},
+        opening_hours: {type: Number},
+        closing_hours: {type: Number},
+        content: {type: String},
         slug: { type: String, slug: 'name', unique: true },
     },
     {

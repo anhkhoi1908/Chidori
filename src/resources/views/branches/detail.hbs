@@ -1,1 +1,62 @@
-<h1>detail</h1>
+<section class="container my-5">
+    <h1 class="title-branch-detail font-weight-bold my-5">{{branch.name}}</h1> 
+    <div class="row justify-content-between">
+        <div class="col-lg-6">
+            <div class="info-branch-detail py-5">
+                <ul>
+                    <li class="d-flex mb-4">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <div class="ml-4">
+                            <h3>Địa chỉ</h3>
+                            <p>{{branch.address}}</p>
+                        </div>
+                    </li>
+                    <li class="d-flex mb-4">
+                        <i class="fa-solid fa-clock"></i>
+                        <div class="ml-4">
+                            <h3>Giờ mở cửa</h3>
+                            <p>{{branch.opening_hours}}:00 - {{branch.closing_hours}}:00</p>
+                        </div>
+                    </li>
+                    <li class="d-flex mb-4">
+                        <i class="fa-solid fa-phone"></i>
+                        <div class="ml-4">
+                            <h3>Điện thoại chi nhánh</h3>
+                            <p>0{{branch.phone}}</p>
+                        </div>
+                    </li>
+                </ul>
+                <div>
+                    <a
+                        href='/clients/bookings/new'
+                        class='btn-booking btn d-block text-white rounded-pill py-4 font-weight-bold'
+                        style='background-color: var(--text-color);'
+                        >Đặt chỗ trước
+                    </a>
+                </div>
+            </div>  
+            <div class="py-5">
+                <p class="text-justify">{{branch.content}}</p>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <h1 class="title-branch-detail font-weight-bold">{{branch.name}}</h1>   
+        </div>
+
+    </div>
+    
+</section>
+
+<style>
+    .title-branch-detail {
+        color: #3e2613;
+    }
+    .info-branch-detail {
+        border-top: 1px solid #e9c19a;
+        border-bottom: 1px solid #e9c19a;
+    }
+    ul li h3 {
+        color: var(--title-color);
+        font-weight: bold;
+    }
+</style>

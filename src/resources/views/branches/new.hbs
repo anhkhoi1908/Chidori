@@ -1,6 +1,8 @@
-<div class="mt-4">
-    <h3>Đăng khóa học</h3>
-    <form class="mt-4 container" method="POST" action="/branches/create">
+<div class="container">
+    <div class="text-center my-5">
+        <h1 class="font-weight-bold">Thêm chi nhánh mới</h1>
+    </div>
+    <form class="container col-lg-6" method="POST" action="/branches/create">
         <div class='mb-3'>
             <label for='name'>Tên chi nhánh</label>
             <input type='text' class='form-control' id='name' name='name' />
@@ -14,17 +16,57 @@
             <textarea name="description" id="description" class="form-control"></textarea>
         </div>
         <div class='mb-3'>
+            <label for='description'>Nội dung</label>
+            <textarea name="content" id="content" class="form-control"></textarea>
+        </div>
+        <div class='mb-3'>
             <label for='description'>Link hình ảnh</label>
             <input type='text' class='form-control' id='image' name='image' />
         </div>
-        {{!-- <div class='mb-3'></div>
-            <label for='videoId'>Video ID</label>
-            <input type='text' class='form-control' id='videoId' name='videoId' />
+        <div class='mb-3'>
+            <label for='description'>Giờ mở cửa</label>
+            <select id='opening_hours' name='opening_hours' class='form-control'>
+                <option>08</option>
+                <option>09</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+                <option>13</option>
+                <option>14</option>
+                <option>15</option>
+                <option>16</option>
+                <option>17</option>
+                <option>18</option>
+                <option>19</option>
+            </select>
         </div>
-        <div class='mb-3'></div>
-            <label for='image'>Image</label>
-            <input type='text' class='form-control' id='image' name='image' />
-        </div> --}}
-        <button type='submit' class='btn btn-primary'>Thêm chi nhánh</button>
+        <div class='mb-3'>
+            <label for='description'>Giờ đóng cửa</label>
+            <select id='closing_hours' name='closing_hours' class='form-control'>
+                <option>08</option>
+                <option>09</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+                <option>13</option>
+                <option>14</option>
+                <option>15</option>
+                <option>16</option>
+                <option>17</option>
+                <option>18</option>
+                <option>19</option>
+                <option>20</option>
+                <option>21</option>
+                <option>22</option>
+                <option>23</option>
+            </select>
+        </div>
+        <div class='mb-3'>
+            <label for='description'>Điện thoại chi nhánh</label>
+            <input type='text' class='form-control' id='phone' name='phone' />
+        </div>  
+        <div class="text-center my-5">
+            <button type='submit' class='btn btn-primary p-3'>Thêm chi nhánh</button>
+        </div>
     </form>
 </div>

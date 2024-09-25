@@ -1,6 +1,8 @@
-<div class="mt-4"></div>
-    <h3>Cập nhật chi nhánh</h3>
-    <form class="mt-4 container" method="POST" action="/branches/{{branch._id}}?_method=PUT">
+<div class="container">
+    <div class="text-center my-5">
+        <h1 class="font-weight-bold">Cập nhật chi nhánh</h1>
+    </div>
+    <form class="container col-lg-6" method="POST" action="/branches/{{branch._id}}?_method=PUT">
         <div class='mb-3'>
             <label for='name'>Tên chi nhánh</label>
             <input type='text' class='form-control' id='name' name='name' value='{{branch.name}}' />
@@ -14,9 +16,59 @@
             <textarea name="description" id="description" class="form-control">{{branch.description}}</textarea>
         </div>
         <div class='mb-3'>
+            <label for='description'>Mô tả</label>
+            <textarea name="content" id="content" class="form-control">{{branch.content}}</textarea>
+        </div>
+        <div class='mb-3'>
             <label for='name'>Link hình ảnh</label>
             <input type='text' class='form-control' id='image' name='image' value='{{branch.image}}' />
         </div>
-        <button type='submit' class='btn btn-primary'>Cập nhật</button>
+        <div class='mb-3'>
+            <label for='description'>Giờ mở cửa</label>
+            <select id='opening_hours' name='opening_hours' class='form-control'>
+                <option>{{branch.opening_hours}}</option>
+                <option>08</option>
+                <option>09</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+                <option>13</option>
+                <option>14</option>
+                <option>15</option>
+                <option>16</option>
+                <option>17</option>
+                <option>18</option>
+                <option>19</option>
+            </select>
+        </div>
+        <div class='mb-3'>
+            <label for='description'>Giờ đóng cửa</label>
+            <select id='closing_hours' name='closing_hours' class='form-control'>
+                <option>{{branch.closing_hours}}</option>
+                <option>08</option>
+                <option>09</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+                <option>13</option>
+                <option>14</option>
+                <option>15</option>
+                <option>16</option>
+                <option>17</option>
+                <option>18</option>
+                <option>19</option>
+                <option>20</option>
+                <option>21</option>
+                <option>22</option>
+                <option>23</option>
+            </select>
+        </div>
+        <div class='mb-3'>
+            <label for='description'>Điện thoại chi nhánh</label>
+            <input type='text' class='form-control' id='phone' name='phone' value='{{branch.phone}}'/>
+        </div>
+        <div class="text-center my-5">
+            <button type='submit' class='btn btn-primary p-3'>Cập nhật</button>
+        </div>
     </form>
 </div>

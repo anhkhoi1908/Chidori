@@ -30,7 +30,7 @@ class BranchController {
     update(req, res, next) {
         // res.jon(req.body)
         Branch.updateOne({ _id: req.params.id }, req.body)
-            .then(() => res.redirect('/'))
+            .then(() => res.redirect('/admin/stored/branches'))
             .catch(next);
     }
 

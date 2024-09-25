@@ -1,6 +1,7 @@
 const Booking = require('../../models/Booking');
 const Branch = require('../../models/Branch');
 const Service = require('../../models/Service');
+const Membership = require('../../models/Membership');
 
 class AdminController {
     // [GET] /admin/stored/bookings
@@ -49,6 +50,22 @@ class AdminController {
                 res.render('admin/stored/stored-services', {
                     deletedCount,
                     services,
+                }),
+            )
+            .catch(next);
+    }
+
+    // [GET] /admin/trash/services
+    storedMemberships(req, res, next) {
+        // Service.find({})
+        //     .lean()
+        //     .then((services) => res.render('admin/stored/stored-services', { services }))
+        //     .catch(next);
+        Promise.all([Membership.find({}).lean(), Membership.countDocumentsWithDeleted({ deleted: true })])
+            .then(([memberships, deletedCount]) =>
+                res.render('admin/stored/stored-memberships', {
+                    deletedCount,
+                    memberships,
                 }),
             )
             .catch(next);
