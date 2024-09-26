@@ -6,8 +6,9 @@ var mongoose_delete = require('mongoose-delete');
 const Service = new Schema(
     {
         name: { type: String },
-        image: { type: String},
-        description: { type: Number},
+        description: {type: String},
+        image: {type: String},
+        slug: { type: String, slug: 'name', unique: true },
     },
     {
         timestamps: true,
@@ -15,6 +16,7 @@ const Service = new Schema(
 );
 
 // Add plugin
+mongoose.plugin(slug)
 Service.plugin(mongoose_delete, { deletedAt: true, overrideMethods: 'all' });
 
 module.exports = mongoose.model('Service', Service);

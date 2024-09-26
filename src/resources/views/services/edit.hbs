@@ -1,21 +1,17 @@
 <div class="mt-4"></div>
-    <h3>Cập nhật chi nhánh</h3>
-    <form class="mt-4 container" method="POST" action="/service/{{service._id}}?_method=PUT">
+    <h3>Cập nhật không gian</h3>
+    <form class="mt-4 container" method="POST" action="/services/{{service._id}}?_method=PUT">
         <div class='mb-3'>
-            <label for='name'>Tên chi nhánh</label>
-            <input type='text' class='form-control' id='name' name='name' value='{{service.name}}' />
+            <label for='name'>Tên không gian</label>
+            <input type='text' class='form-control' id='name' name='name' value="{{service.name}}" />
         </div>
         <div class='mb-3'>
-            <label for='name'>Địa chỉ</label>
-            <input type='text' class='form-control' id='address' name='address' value='{{service.address}}' />
-        </div>
-        <div class='mb-3'>
-            <label for='description'>Mô tả</label>
-            <textarea name="description" id="description" class="form-control">{{service.description}}</textarea>
+            <label for='name'>Mô tả</label>
+            <textarea name="description" id="description" class='form-control'>{{service.description}}</textarea>
         </div>
         <div class='mb-3'>
             <label for='name'>Link hình ảnh</label>
-            <input type='text' class='form-control' id='image' name='image' value='{{service.image}}' />
+            <input type="text" class="form-control" name="image" id="image" value="{{service.image}}">
         </div>
         <button type='submit' class='btn btn-primary'>Cập nhật</button>
     </form>
