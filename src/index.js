@@ -23,6 +23,13 @@ app.use(express.json());
 // Method override
 app.use(methodOverride('_method'));
 
+// const hbs = exhbs.create({
+//     defaultLayout: 'main',
+//     layoutsDir: path.join(__dirname, 'views/layouts/main'),
+//     partialsDir: [path.join(__dirname, 'views/partials')],
+//     extname: '.hbs'
+// })
+
 // Template engine
 app.engine(
     'hbs',

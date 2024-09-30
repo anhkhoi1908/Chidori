@@ -1,19 +1,19 @@
-{{! <section class='overflow-hidden'>
+<section class='overflow-hidden'>
     <div class='banner h-100 overflow-hidden'>
         <div class='banner-img w-100 h-100'></div>
         <div class='banner-content w-100 h-100 d-flex flex-col'>
             <h1>Chidori | Coffee in Bed®</h1>
         </div>
     </div>
-</section> }}
+</section> 
 
 <div class='container my-5'>
-    <div style="">
+    <div style="margin-top: 6rem">
         <div class='text-center mb-5'>
             <h1 class='font-weight-bold'>Không gian ở Chidori</h1>
             <h3>Bạn cần bao nhiêu riêng tư, Chidori cũng có!</h3>
         </div>
-        <div class='tabs'>
+        <div class='tabs justify-content-center'>
             {{#each services}}
                 <div class='tab-item {{this.active}}'>
                     {{this.name}}
@@ -21,7 +21,7 @@
                 <div class='line'></div>
             {{/each}}
         </div>
-        <div class='tab-content'>
+        <div class='tab-content' style="margin-top: 4rem;">
             {{#each services}}
                 <div class='tab-pane {{this.active}}'>
                     <div class="row">
@@ -30,8 +30,20 @@
                         </div>
                         <div class="col-lg-4">
                             <h4>Không gian</h4>
-                            <h1>{{this.name}}</h1>
+                            <h1 class="font-weight-bold mt-2 mb-3">{{this.name}}</h1>
                             <p class="text-justify">{{this.description}}</p>
+                            <a
+                                href='/services/{{this.slug}}'
+                                class='btn-booking btn d-block rounded-pill py-4 font-weight-bold mb-3 mt-5'
+                                style='background-color: transparency; color: #c23564; border: 1px solid #c23564'
+                                >Xem chi tiết
+                            </a>
+                            <a
+                                href='/clients/bookings/new'
+                                class='btn-booking btn d-block text-white rounded-pill py-4 font-weight-bold'
+                                style='background-color: #c23564;'
+                                >Đặt chỗ trước
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -39,12 +51,12 @@
         </div>
     </div>
 
-    <div style="margin-top: 4rem;">
+    <div style="margin-top: 6rem">
         <div class='text-center mb-5'>
             <h1 class='font-weight-bold'>Chi nhánh Chidori</h1>
             <h3>7 địa điểm trên nhiều quận cho bạn ghé thăm tại Thành phố Hồ Chí Minh</h3>
         </div>
-        <div class='row row-cols-1 row-cols-md-3'>
+        <div class='row row-cols-1 row-cols-md-3' style="margin-top: 6rem;">
             {{#each branches}}
                 <div class='col mb-4'>
                     <div class='card px-0 overflow-hidden branch-item' style=''>
@@ -70,13 +82,13 @@
     background-position: center; background-repeat: no-repeat; background-size: cover;} .banner-content
     {background-color: #3e261399;} .card-img-service { aspect-ratio: 2; object-fit: cover;} .branch-item {
     border-radius: 4rem !important; } .tabs { display: flex; position: relative; } .tabs .line { position: absolute;
-    left: 0; bottom: 0; width: 0; height: 6px; border-radius: 15px; background-color: #c23564; transition: all 0.2s
+    left: 0; bottom: 0; width: 0; height: 6px; border-radius: 15px; background-color: var(--text-color); transition: all 0.2s
     ease; } .tab-item { min-width: 80px; padding: 16px 20px 11px 20px; font-size: 20px; text-align: center; color:
-    #c23564; background-color: #fff; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom: 5px solid
+    var(--text-color); background-color: #fff; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom: 5px solid
     transparent; opacity: 0.6; cursor: pointer; transition: all 0.5s ease; } .tab-icon { font-size: 24px; width: 32px;
     position: relative; top: 2px; } .tab-item:hover { opacity: 1; background-color: rgba(194, 53, 100, 0.05);
     border-color: rgba(194, 53, 100, 0.1); } .tab-item.active { opacity: 1; } .tab-content { padding: 28px 0; }
-    .tab-pane { color: #333; display: none; } .tab-pane.active { display: block; } .tab-pane h2 { font-size: 24px;
+    .tab-pane { color: #333; display: none; } .tab-pane.active { display: block;} .tab-pane h2 { font-size: 24px;
     margin-bottom: 8px; } .service-image {border-top-left-radius: 16rem; border-bottom-right-radius: 16rem;}
 </style>
 
@@ -159,5 +171,6 @@
 
         line.style.left = tabs[index].offsetLeft + 'px'
         line.style.width = tabs[index].scrollWidth + 'px'
+        
     }
 </script>

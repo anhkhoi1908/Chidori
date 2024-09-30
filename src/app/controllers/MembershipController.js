@@ -3,7 +3,7 @@ const Membership = require('../../models/Membership')
 class MembershipController {
     // [GET] /membership
     index(req, res, next) {
-        res.render('membership');
+        res.render('membership', { layout: 'sub' });
 
         // Promise.all([Branch.find({}).lean(), Service.find({}).lean()])
         //     .then(([branches, services]) => res.render('home', { branches, services }))

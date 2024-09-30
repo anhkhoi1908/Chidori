@@ -5,6 +5,7 @@ const BranchController = require('../app/controllers/BranchController');
 router.get('/new', BranchController.new);
 router.post('/create', BranchController.create);
 router.get('/:id/edit', BranchController.edit);
+router.get('/:id/admin_detail', BranchController.admin_detail);
 router.put('/:id', BranchController.update);
 router.patch('/:id/restore', BranchController.restore);
 router.delete('/:id', BranchController.delete);

@@ -8,16 +8,17 @@ class AdminController {
     storedBookings(req, res, next) {
         // res.render('admin/stored-bookings');
 
-        // Booking.find({})
+        // Membership.find({})
         //     .lean()
         //     .then((bookings) => res.render('admin/stored/stored-bookings', { bookings }))
         //     .catch(next);
 
-        Promise.all([Booking.find({}).lean(), Booking.countDocumentsWithDeleted({ deleted: true })])
+        Promise.all([Booking.find({}).lean(), Booking.countDocumentsWithDeleted({ deleted: true})])
             .then(([bookings, deletedCount]) =>
                 res.render('admin/stored/stored-bookings', {
                     deletedCount,
                     bookings,
+                    layout: 'admin'
                 }),
             )
             .catch(next);
@@ -34,6 +35,7 @@ class AdminController {
                 res.render('admin/stored/stored-branches', {
                     deletedCount,
                     branches,
+                    layout: 'admin'
                 }),
             )
             .catch(next);
@@ -50,6 +52,7 @@ class AdminController {
                 res.render('admin/stored/stored-services', {
                     deletedCount,
                     services,
+                    layout: 'admin'
                 }),
             )
             .catch(next);
@@ -66,6 +69,7 @@ class AdminController {
                 res.render('admin/stored/stored-memberships', {
                     deletedCount,
                     memberships,
+                    layout: 'admin'
                 }),
             )
             .catch(next);
@@ -75,7 +79,7 @@ class AdminController {
     trashBranches(req, res, next) {
         Branch.findWithDeleted({ deleted: true })
             .lean()
-            .then((branches) => res.render('admin/trash/trash-branches', { branches }))
+            .then((branches) => res.render('admin/trash/trash-branches', { branches, layout: 'admin' }))
             .catch(next);
     }
 
@@ -83,7 +87,7 @@ class AdminController {
     trashServices(req, res, next) {
         Service.findWithDeleted({ deleted: true })
             .lean()
-            .then((services) => res.render('admin/trash/trash-services', { services }))
+            .then((services) => res.render('admin/trash/trash-services', { services, layout: 'admin' }))
             .catch(next);
     }
 
@@ -91,7 +95,15 @@ class AdminController {
     trashBookings(req, res, next) {
         Booking.findWithDeleted({ deleted: true })
             .lean()
-            .then((bookings) => res.render('admin/trash/trash-bookings', { bookings }))
+            .then((bookings) => res.render('admin/trash/trash-bookings', { bookings, layout: 'admin' }))
+            .catch(next);
+    }
+
+    // [GET] /admin/trash/memberships
+    trashMemberships(req, res, next) {
+        Membership.findWithDeleted({ deleted: true })
+            .lean()
+            .then((memberships) => res.render('admin/trash/trash-memberships', { memberships, layout: 'admin' }))
             .catch(next);
     }
 }

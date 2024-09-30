@@ -1,14 +1,13 @@
-<form class='mt-4 mx-4' method='POST' action='' name='container-form'>
-    {{!-- <div class="text-center my-5">
-        <h1 class="font-weight-bold">Danh sách chi nhánh</h1>
-    </div> --}}
-    <a href='/admin/trash/branches'>Thùng rác ({{deletedCount}})</a>
-    <div class='mt-4 d-flex align-items-center'>
-        <a href='/branches/new' type='button' class='btn btn-primary mr-4'>Thêm mới</a>
+<form class='mt-4 container' method='POST' action='' name='container-form'>
+    <a href='/admin/stored/memberships'>Quay lại</a>
+    <div class="text-center my-5">
+        <h1 class="font-weight-bold">Thành viên đã xóa</h1>
+    </div>
+    <div class='mt-4 d-flex align-items-center justify-content-between'>
         <div class='d-flex align-items-center'>
-            <div class='form-check d-flex align-items-center'>
+            <div class='form-check'>
                 <input class='form-check-input' type='checkbox' id='checkbox-all' />
-                <label class='form-check-label ml-2' for='checkbox-all'>
+                <label class='form-check-label' for='checkbox-all'>
                     Chọn tất cả
                 </label>
             </div>
@@ -25,25 +24,24 @@
             <div class='btn btn-primary disabled check-all-submit-btn'>Thực hiện</div>
         </div>
 
+        <a href='/services/new' type='button' class='btn btn-primary'>Thêm mới</a>
     </div>
     <div class="overflow-hidden" style="overflow-x: auto !important;">
-        <table class='table mt-4' id="myTable">
+
+        <table class='table mt-4'>
             <thead>
                 <tr>
                     <th scope='col'></th>
                     <th scope='col'>STT</th>
-                    <th scope='col'>Tên chi nhánh</th>
-                    <th scope='col'>Địa chỉ</th>
-                    <th scope='col'>Giờ mở cửa</th>
-                    <th scope='col'>Điện thoại</th>
-                    {{!-- <th scope='col'>Mô tả</th> --}}
-                    <th scope='col'>Slug</th>
-                    <th scope='col'></th>
-                    {{!-- <th scope='col'>Hành động</th> --}}
+                    <th scope='col'>SĐT</th>
+                    <th scope='col'>Tên thành viên</th>
+                    <th scope='col'>Email</th>
+                    <th scope='col'>Ngày sinh</th>
+                    <th scope='col'>Giới tính</th>
                 </tr>
             </thead>
             <tbody>
-                {{#each branches}}
+                {{#each memberships}}
                     <tr>
                         <td>
                             <div class='form-check'>
@@ -51,28 +49,26 @@
                             </div>
                         </td>
                         <td scope='row'>{{sum @index 1}}</td>
-                        <td>{{this.name}}</td>
-                        <td>{{this.address}}</td>
-                        <td>{{this.opening_hours}}:00 - {{this.closing_hours}}:00</td>
                         <td>{{this.phone}}</td>
-                        {{!-- <td>{{this.description}}</td> --}}
-                        <td>{{this.slug}}</td>
-                        <td><a href="/branches/{{this._id}}/admin_detail">Xem chi tiết</a></td>
-                        {{!-- <td>
-                            <a href='/branches/{{this._id}}/edit' type='button' class='btn btn-warning'>Sửa</a>
+                        <td>{{this.name}}</td>
+                        <td>{{this.email}}</td>
+                        <td>{{this.birthday}}</td>
+                        <td>{{this.gender}}</td>  
+                        <td>
+                            <a href='' type='button' class='btn btn-warning btn-restore' data-id={{this._id}}>Khôi phục</a>
                             <a
                                 type='button'
                                 data-toggle='modal'
                                 data-target='#delete'
-                                data-id='{{this._id}}'
+                                data-id={{this._id}}
                                 class='btn btn-danger'
-                            >Xóa</a>
-                        </td> --}}
+                            >Xóa vĩnh viễn</a>
+                        </td>
                     </tr>
                 {{else}}
                     <tr>
-                        <td colspan='5' class='text-center'>Bạn chưa đăng khóa học nào.
-                            <a href='/bookings/create'>Đăng khóa học</a></td>
+                        <td colspan='5' class='text-center'>Thùng rác trống.
+                            <a href='/admin/stored/services'>Danh sách chi nhánh</a></td>
                     </tr>
                 {{/each}}
             </tbody>
@@ -100,7 +96,10 @@
 </div>
 
 {{! Delete form  }}
-<form name='delete-branch-form' method='POST'></form>
+<form name='delete-service-form' method='POST'></form>
+
+{{! Restore form  }}
+<form name='restore-service-form' method='POST'></form>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() { 
@@ -145,21 +144,28 @@
             }
         })
         
-    // Delete course
-        var branchId; 
-        const btnDeleteBranch = document.getElementById('delete-btn'); 
-        const deleteForm = document.forms['delete-branch-form'];
+    // Delete course (xóa mềm, vĩnh viễn đều sử dụng được). Xóa mềm thì thêm plugin và đổi deleteOne -> delete
+        var serviceId; 
+        const btnDeleteService = document.getElementById('delete-btn'); 
+        const deleteForm = document.forms['delete-service-form'];
 
         $('#delete').on('show.bs.modal', function(event) { 
             const button = $(event.relatedTarget); 
-            branchId = button.data('id');  
+            serviceId = button.data('id');  
         }) 
 
         // Button delete clicked
-        btnDeleteBranch.addEventListener('click', function() { deleteForm.action = '/branches/' + branchId + '?_method=DELETE'; 
+        btnDeleteService.addEventListener('click', function() { deleteForm.action = '/services/' + serviceId + '/force?_method=DELETE'; 
         deleteForm.submit(); })
+
+        // Button restore clicked
+        const restoreBtn = $('.btn-restore')
+        const restoreForm = document.forms['restore-service-form'];
+        restoreBtn.click(function(e) {
+            e.preventDefault()
+            var serviceId = $(this).data('id')
+            restoreForm.action = '/services/' + serviceId + '/restore?_method=PATCH'; 
+            restoreForm.submit();
+        })
     })
-
-</script> 
-
-
+</script>   

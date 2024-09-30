@@ -1,5 +1,7 @@
-<form class='mt-4 container' method="POST" action="" name="container-form">
-    <h3>Danh sách Bookings</h3>
+<form class='mt-4 mx-4' method="POST" action="" name="container-form">
+    {{!-- <div class="text-center my-5">
+        <h1 class="font-weight-bold">Danh sách Booking</h1>
+    </div> --}}
     <a href="/admin/trash/bookings">Thùng rác ({{deletedCount}})</a>
     <div class='mt-4 d-flex align-items-center justify-content-between'>
         <div class="d-flex align-items-center">
@@ -25,7 +27,7 @@
         {{!-- <a href="/clients/bookings/new" type="button" class="btn btn-primary">Thêm mới</a> --}}
     </div>
     <div class="overflow-hidden" style="overflow-x: auto !important;">
-        <table class='table mt-4'>
+        <table class='table mt-4' id="myTable">
             <thead>
                 <tr>
                     <th scope='col'></th>

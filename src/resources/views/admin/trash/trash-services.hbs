@@ -1,6 +1,8 @@
 <form class='mt-4 container' method='POST' action='' name='container-form'>
     <a href='/admin/stored/services'>Quay lại</a>
-    <h3>Chi nhánh đã xóa</h3>
+    <div class="text-center my-5">
+        <h1 class="font-weight-bold">Dịch vụ đã xóa</h1>
+    </div>
     <div class='mt-4 d-flex align-items-center justify-content-between'>
         <div class='d-flex align-items-center'>
             <div class='form-check'>
@@ -24,51 +26,50 @@
 
         <a href='/services/new' type='button' class='btn btn-primary'>Thêm mới</a>
     </div>
-    <table class='table mt-4'>
-        <thead>
-            <tr>
-                <th scope='col'></th>
-                <th scope='col'>STT</th>
-                <th scope='col'>Tên chi nhánh</th>
-                <th scope='col'>Mô tả</th>
-                {{! <th scope='col'>SĐT</th>
-                <th scope='col'>Thời gian đặt</th>
-                <th scope='col'>Combo</th> }}
-            </tr>
-        </thead>
-        <tbody>
-            {{#each services}}
+    <div class="overflow-hidden" style="overflow-x: auto !important;">
+
+        <table class='table mt-4'>
+            <thead>
                 <tr>
-                    <td>
-                        <div class='form-check'>
-                            <input class='form-check-input' type='checkbox' value='{{this._id}}' name='courseIds[]' />
-                        </div>
-                    </td>
-                    <th scope='row'>{{sum @index 1}}</th>
-                    <td>{{this.name}}</td>
-                    {{!-- <td>{{this.description}}</td> --}}
-                    {{!-- <td>{{this.phone}}</td>
-                    <td>{{this.hour}}:{{this.minute}} | {{this.daycome}}</td>
-                    <td>{{this.combo}}</td> --}}
-                    <td>
-                        <a href='' type='button' class='btn btn-warning btn-restore' data-id={{this._id}}>Khôi phục</a>
-                        <a
-                            type='button'
-                            data-toggle='modal'
-                            data-target='#delete'
-                            data-id={{this._id}}
-                            class='btn btn-danger'
-                        >Xóa vĩnh viễn</a>
-                    </td>
+                    <th scope='col'></th>
+                    <th scope='col'>STT</th>
+                    <th scope='col'>Tên dịch vụ</th>
+                    <th scope='col'>Mô tả</th>
+                    <th scope='col'>Slug</th>
                 </tr>
-            {{else}}
-                <tr>
-                    <td colspan='5' class='text-center'>Thùng rác trống.
-                        <a href='/admin/stored/services'>Danh sách chi nhánh</a></td>
-                </tr>
-            {{/each}}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {{#each services}}
+                    <tr>
+                        <td>
+                            <div class='form-check'>
+                                <input class='form-check-input' type='checkbox' value='{{this._id}}' name='courseIds[]' />
+                            </div>
+                        </td>
+                        <th scope='row'>{{sum @index 1}}</th>
+                        <td>{{this.name}}</td>
+                        <td>{{this.description}}</td>
+                        <td>{{this.slug}}</td>
+                        <td>
+                            <a href='' type='button' class='btn btn-warning btn-restore' data-id={{this._id}}>Khôi phục</a>
+                            <a
+                                type='button'
+                                data-toggle='modal'
+                                data-target='#delete'
+                                data-id={{this._id}}
+                                class='btn btn-danger'
+                            >Xóa vĩnh viễn</a>
+                        </td>
+                    </tr>
+                {{else}}
+                    <tr>
+                        <td colspan='5' class='text-center'>Thùng rác trống.
+                            <a href='/admin/stored/services'>Danh sách chi nhánh</a></td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
 </form>
 
 {{! Confirm delete course }}

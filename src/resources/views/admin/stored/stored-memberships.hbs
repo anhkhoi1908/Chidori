@@ -1,6 +1,6 @@
 <form class='mt-4 container' method='POST' action='' name='container-form'>
     <div class="text-center my-5">
-        <h1 class="font-weight-bold">Danh sách chi nhánh</h1>
+        <h1 class="font-weight-bold">Danh sách thành viên</h1>
     </div>
     <a href='/admin/trash/memberships'>Thùng rác ({{deletedCount}})</a>
     <div class='mt-4 d-flex align-items-center justify-content-between'>
@@ -26,19 +26,16 @@
 
         <a href='/memberships/new' type='button' class='btn btn-primary'>Thêm mới</a>
     </div>
-    <div class="overflow-hidden" style="overflow-x: auto !important;">
         <table class='table mt-4' id="table">
             <thead>
                 <tr>
                     <th scope='col'></th>
                     <th scope='col'>STT</th>
-                    <th scope='col'>Tên chi nhánh</th>
-                    <th scope='col'>Địa chỉ</th>
-                    <th scope='col'>Giờ mở cửa</th>
-                    <th scope='col'>Điện thoại</th>
-                    <th scope='col'>Mô tả</th>
-                    <th scope='col'>Slug</th>
-                    <th scope='col'>Hành động</th>
+                    <th scope='col'>SĐT</th>
+                    <th scope='col'>Tên thành viên</th>
+                    <th scope='col'>Email</th>
+                    <th scope='col'>Ngày sinh</th>
+                    <th scope='col'>Giới tính</th>
                 </tr>
             </thead>
             <tbody>
@@ -50,12 +47,11 @@
                             </div>
                         </td>
                         <td scope='row'>{{sum @index 1}}</td>
-                        <td>{{this.name}}</td>
-                        <td>{{this.address}}</td>
-                        <td>{{this.opening_hours}}:00 - {{this.closing_hours}}:00</td>
                         <td>{{this.phone}}</td>
-                        <td>{{this.description}}</td>
-                        <td>{{this.slug}}</td>  
+                        <td>{{this.name}}</td>
+                        <td>{{this.email}}</td>
+                        <td>{{this.birthday}}</td>
+                        <td>{{this.gender}}</td>  
                         <td>
                             <a href='/memberships/{{this._id}}/edit' type='button' class='btn btn-warning'>Sửa</a>
                             <a
@@ -75,7 +71,6 @@
                 {{/each}}
             </tbody>
         </table>
-    </div>
 </form>
 
 {{! Confirm delete course }}

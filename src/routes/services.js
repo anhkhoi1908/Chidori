@@ -9,5 +9,7 @@ router.put('/:id', ServiceController.update);
 router.patch('/:id/restore', ServiceController.restore);
 router.delete('/:id', ServiceController.delete);
 router.delete('/:id/force', ServiceController.forceDelete);
+router.get('/:slug', ServiceController.detail);
+
 
 module.exports = router;

@@ -10,5 +10,6 @@ router.get('/stored/memberships', AdminController.storedMemberships);
 router.get('/trash/branches', AdminController.trashBranches);
 router.get('/trash/services', AdminController.trashServices);
 router.get('/trash/bookings', AdminController.trashBookings);
+router.get('/trash/memberships', AdminController.trashMemberships);
 
 module.exports = router;

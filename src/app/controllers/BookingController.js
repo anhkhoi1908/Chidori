@@ -8,7 +8,7 @@ class BookingController {
         // res.render('clients/booking-new');
 
         Promise.all([Branch.find({}).lean(), Combo.find({}).lean()])
-            .then(([branches, combos]) => res.render('clients/booking-new', { branches, combos }))
+            .then(([branches, combos]) => res.render('clients/booking-new', { branches, combos, layout: 'sub'}))
             .catch(next);
     }
 

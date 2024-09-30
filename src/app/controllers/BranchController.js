@@ -3,7 +3,7 @@ const Branch = require('../../models/Branch');
 class BranchController {
     // [GET] /branches/new
     new(req, res, next) {
-        res.render('branches/new');
+        res.render('branches/new', {layout: 'admin'});
     }
 
     // [POST] /branches/create
@@ -22,7 +22,7 @@ class BranchController {
         // res.render('branches/edit');
         Branch.findById(req.params.id)
             .lean()
-            .then((branch) => res.render('branches/edit', { branch }))
+            .then((branch) => res.render('branches/edit', { branch, layout: 'admin' }))
             .catch(next);
     }
 
@@ -38,7 +38,7 @@ class BranchController {
     delete(req, res, next) {
         // res.jon(req.body)
         Branch.delete({ _id: req.params.id })
-            .then(() => res.redirect('back'))
+            .then(() => res.redirect('/admin/stored/branches'))
             .catch(next);
     }
 
@@ -63,6 +63,14 @@ class BranchController {
             .lean()
             // .then((course) => res.json(course))
             .then((branch) => res.render('branches/detail', { branch }))
+            .catch(next);
+    }
+
+    // [GET] /branches/:id/admin_detail
+    admin_detail(req, res, next) {
+        Branch.findById(req.params.id)
+            .lean()
+            .then((branch) => res.render('branches/admin_detail', { branch, layout: 'admin' }))
             .catch(next);
     }
 }
